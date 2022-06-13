@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 public class Case {
    
    private boolean estBombe;
@@ -8,7 +9,11 @@ public class Case {
    private int lig; // permet de savoir sur quelle ligne est la grille
    private int col; // permet de savoir sur quelle colonne est la grille 
    private ArrayList<Case> LCaseVoisine ;
-    
+    /**
+     * Constructeur de la classe Case
+     * @param lig : la ligne de la case
+     * @param col : La colonne de la case
+     */
     public Case(int lig, int col){
         this.estBombe = false;
         this.estRelevee = false;
@@ -20,68 +25,102 @@ public class Case {
     }
 
     // Getter
+    /**
+     * Getter de la variable estBombe
+     * @return int colonne de la case 
+     */
     public int getCol() {
         // retourne la colonne de la case
         return this.col;
     }
+    /**
+     * Getter de la variable estBombe
+     * @return int : la ligne de la case
+     */
     public int getLig() {
         // retourne la ligne de la case
         return this.lig;
     }
-
+    /**
+     * retourne si la case est une bombe
+     * @return boolean 
+     */
     public boolean getEstBombe(){
         //  retourne vrai si la case est une bombe
         return this.estBombe;
     }
 
+    /**
+     * retourne si la case est marquée
+     * @return boolean 
+     */
     public boolean getEstMarquee(){
         //  retourne vrai si la case est marquée
         return this.estMarquee;
     }
 
+    /**
+     * retourne si la case est relevée
+     * @return boolean 
+     */
     public boolean getEstRelevee(){
         //  retourne vrai si la case est revelée
         return this.estRelevee;
     }
-
+    /**
+     * retourne la liste des cases voisines
+     * @return ArrayList<> 
+     */
     public ArrayList<Case> getLCaseVoisine() {
         // retourne la liste des cases voisines
         return LCaseVoisine;
     }
 
     // Setter
-
+    /**
+     * Setter de la variable estBombe
+     * @param boolean : true si la case est une bombe sinon false
+     */
     public void setEstBombe(boolean estBombe) {
         // permet de définir si la case est une bombe
         this.estBombe = estBombe;
     }
-
+    /**
+     * Setter de la variable estRelevee
+     * @param boolean : true si la case est relevée sinon false
+     */
     public void setEstMarquee(boolean estMarquee) {
         // permet de définir si la case est marquée
         this.estMarquee = estMarquee;
     }
-
+    /**
+     * Setter de la variable estRelevee
+     * @param boolean : true si la case est relevée sinon false
+     */
     public void setEstRelevee(boolean estRelevee) {
         // permet de définir si la case est revelée
         this.estRelevee = estRelevee;
     }
-    
+    /**
+     * Setter de la variable estRelevee
+     * @param ArrayList<Case> : la liste des cases voisines
+     */
     public void setLCaseVoisine(ArrayList<Case> lCaseVoisine) {
         this.LCaseVoisine = lCaseVoisine;
     }
    // Fonction 
-
+    /**
+     * Permet d'ajouter une case voisine à la liste des cases voisines
+     * @param Case : la case voisine à ajouter
+     */
     public void addCaseVosine(Case c){
-        // permet d'ajouter une case voisine à la liste des cases voisines
         this.LCaseVoisine.add(c);
     }
-    
-    public void marquer(){
-        // permet de marquer la case
-        this.estMarquee = true;
-    }
-      
-    
+     
+    /**
+     * Permet de retourner le nombre de bombe voisin à la case
+     * @return int : le nombre de bombes autour de la case
+     */
     public int getNbbombeVoisne(){
         // retourne le nombre de bombes voisines
         
@@ -94,7 +133,10 @@ public class Case {
         return nbBombeproche;                        
     
     }
-
+    /**
+     * Gere l'affiche du terminal
+     * @return String : le caractère à afficher
+     */
     public String getAffichage(){
         // retourne l'affichage de la case
         
@@ -108,7 +150,7 @@ public class Case {
 
         if(this.estRelevee){
             if (this.estBombe){
-                return "💣";
+                return "@";
             }
 
             
@@ -158,7 +200,10 @@ public class Case {
         
         return " "; // cas ou elle n'est pas reveler
     }
-
+    /**
+     * Gere l'affiche du terminal
+     * @return String : le caractère à afficher
+     */
     public String getAffichageIHM(){
         // retourne l'affichage de la case
         
@@ -213,6 +258,10 @@ public class Case {
     }
 
     // Affichage
+    /**
+     * L'affichage de la case
+     * @return String : le caractère à afficher
+     */
     @Override
     public String toString(){
         // retourne une chaine de caractère qui affiche la case
@@ -239,10 +288,18 @@ public class Case {
         }
         */
     }
+    /**
+     * Gere l'affiche du nombre de bombe proche de la case
+     */
     public void afficher() {
         // affiche la case pour le plateau
         System.out.print(this.getAffichage()+ " ");
     }
+    /**
+     * Gere l'égalité des case
+     * @param c : la case à comparer
+     * @return boolean : true si les deux cases sont égales sinon false
+     */
     @Override
     public boolean equals(Object o){
         // permet de comparer deux cases
@@ -254,7 +311,10 @@ public class Case {
             return false;
         }
     }
-    
+    /**
+     * Gere le hashcode des cases
+     * @return int : le hashcode de la case
+     */
     @Override
     public int hashCode(){
         return System.identityHashCode(this);

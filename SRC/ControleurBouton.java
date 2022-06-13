@@ -5,7 +5,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class ControleurBouton implements EventHandler<MouseEvent> {
@@ -26,9 +25,8 @@ public class ControleurBouton implements EventHandler<MouseEvent> {
     public void handle(MouseEvent e) {
         if (!this.laCase.getEstRelevee()) {
             if (e.getButton() == MouseButton.PRIMARY) {
-                System.out.println("clic gauche ( "+this.laCase.getLig()+", "+this.laCase.getCol()+" )");
                 this.lePlateau.creuser(this.laCase.getLig(), this.laCase.getCol());
-                System.out.println(this.lePlateau.getlBombe());
+                
                 this.bouton.maj();
                 this.demineur.maj_de_la_grille();
                 this.bouton.setDisable(true);
@@ -37,7 +35,7 @@ public class ControleurBouton implements EventHandler<MouseEvent> {
             if (e.getButton() == MouseButton.SECONDARY) {
                 System.out.println("clic droit");
                 if (!this.laCase.getEstRelevee()) {
-                    this.laCase.marquer();
+                    this.laCase.setEstMarquee(true);
                     this.demineur.maj_de_la_grille();
                     this.bouton.maj();
                 }

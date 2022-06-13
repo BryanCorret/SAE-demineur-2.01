@@ -28,18 +28,18 @@ public class Bouton extends Button{
                 this.setGraphic(iv);
             }
         catch(Exception e){
-            this.setText(laCase.getAffichage());
+            this.setText(laCase.getAffichageIHM());
         }
     }
     
     public void maj(){
-        this.setText(this.laCase.getAffichage());
+        this.setText(this.laCase.getAffichageIHM());
         if (this.laCase.getEstRelevee())
 
             this.setDisable(true);
 
         else
             this.setDisable(false);
-        this.setText(this.laCase.getAffichage());
+        this.setText(this.laCase.getAffichageIHM());
     }
 }
