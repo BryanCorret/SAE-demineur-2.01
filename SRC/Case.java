@@ -2,14 +2,17 @@ import java.util.ArrayList;
 
 public class Case {
    
-   private boolean estBombe = false;
-   private boolean estRelevee = false;
-   private boolean estMarquee = false;
+   private boolean estBombe;
+   private boolean estRelevee;
+   private boolean estMarquee;
    private int lig; // permet de savoir sur quelle ligne est la grille
    private int col; // permet de savoir sur quelle colonne est la grille 
    private ArrayList<Case> LCaseVoisine ;
     
     public Case(int lig, int col){
+        this.estBombe = false;
+        this.estRelevee = false;
+        this.estMarquee = false;
         this.lig = lig;
         this.col = col;
         this.LCaseVoisine = new ArrayList<>();
@@ -63,6 +66,9 @@ public class Case {
         this.estRelevee = estRelevee;
     }
     
+    public void setLCaseVoisine(ArrayList<Case> lCaseVoisine) {
+        this.LCaseVoisine = lCaseVoisine;
+    }
    // Fonction 
 
     public void addCaseVosine(Case c){
@@ -102,8 +108,10 @@ public class Case {
 
         if(this.estRelevee){
             if (this.estBombe){
-                return "@";
+                return "💣";
             }
+
+            
             else{ // si elle est revele et ce n'est pas une bombe
                 if(this.getNbbombeVoisne() == 0){
                     return GREEN +"0"+ RESET; // vert
@@ -139,15 +147,69 @@ public class Case {
                 if(this.getNbbombeVoisne() == 8){
                     return RED +"8"+RESET;
                 }
+                
             }
         }  
 
         else if (this.estMarquee){ // cas ou elle est marquee
-            return "?";
+            return "M";
         }
 
         
-        return "."; // cas ou elle n'est pas reveler
+        return " "; // cas ou elle n'est pas reveler
+    }
+
+    public String getAffichageIHM(){
+        // retourne l'affichage de la case
+        
+        if(this.estRelevee){
+            if (this.estBombe){
+                return "💣";
+            }
+            else{ // si elle est revele et ce n'est pas une bombe
+                if(this.getNbbombeVoisne() == 0){
+                    return "0"; // vert
+                }
+
+                if(this.getNbbombeVoisne() == 1){
+                    return "1"; // violet
+                }
+
+                if(this.getNbbombeVoisne() == 2){
+                    return "2"; // Cyan
+                }
+
+                if(this.getNbbombeVoisne() == 3){
+                    return "3"; // bleu
+                }
+
+                if(this.getNbbombeVoisne() == 4){
+                    return "4"; // Jaune
+                }
+
+                // cas  rare 
+                if(this.getNbbombeVoisne() == 5){
+                    return "5"; // Jaune
+                }
+                
+                if(this.getNbbombeVoisne() == 6){
+                    return "6" ; // rouge
+                }
+                if(this.getNbbombeVoisne() == 7){
+                    return "7";
+                }
+                if(this.getNbbombeVoisne() == 8){
+                    return "8";
+                }
+            }
+        }  
+
+        else if (this.estMarquee){ // cas ou elle est marquee
+            return "⚐";
+        }
+
+        
+        return " "; // cas ou elle n'est pas reveler
     }
 
     // Affichage
@@ -155,7 +217,8 @@ public class Case {
     public String toString(){
         // retourne une chaine de caractère qui affiche la case
     
-        
+        return "(" + this.lig +", "+ this.col + ")";
+        /*
         if (this.estMarquee && this.estBombe && !(this.estRelevee)){ // cas ou elle est marquee et une bombe et pas reveler
             return "La case (" + this.getLig() + ", "+this.getCol()+ ")" + " est marquee et possède une bombe";
         }
@@ -174,7 +237,7 @@ public class Case {
         else { // cas ou elle n'est pas marqué et n'est pas bombe et n'est pas révélé
             return "La case (" + this.getLig() + ", "+this.getCol()+ ")" + " ,'n'est ni marqué, ne possède pas de bombe et n'est pas révélé";
         }
-        
+        */
     }
     public void afficher() {
         // affiche la case pour le plateau
@@ -194,6 +257,6 @@ public class Case {
     
     @Override
     public int hashCode(){
-        return this.hashCode();
+        return System.identityHashCode(this);
     }
 }
